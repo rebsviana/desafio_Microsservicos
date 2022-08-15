@@ -5,7 +5,7 @@ import com.ciandt.api.pedidos.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
-
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -17,6 +17,7 @@ public class PedidoDto {
 
     private LocalDateTime dataHora;
 
+    @NotNull(message = "Status não pode ser vazio")
     private Status status;
 
     @JsonIgnore
