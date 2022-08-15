@@ -63,13 +63,8 @@ public class PedidoServiceImpl implements PedidoService {
 
         var pedidoExist = repository.findById(id).orElseThrow(PedidoNotFoundException::new);
 
-        var pedido = Pedido.builder()
-                .status(status)
-                .dataHora(pedidoExist.getDataHora())
-                .id(id)
-                .itens(pedidoExist.getItens())
-                .build();
+        pedidoExist.setStatus(status);
 
-        repository.save(pedido);
+        repository.save(pedidoExist);
     }
 }
