@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,7 @@ public class PagamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> savePagamento(@RequestBody PagamentoDto pagamentoDto){
+    public ResponseEntity<Void> savePagamento(@Valid @RequestBody PagamentoDto pagamentoDto){
         var pagamento = mapper.convertValue(pagamentoDto, Pagamento.class);
 
         var pagamentoSave = service.savePagamento(pagamento);
@@ -53,7 +54,7 @@ public class PagamentoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updatePagamento(@PathVariable Long id, @RequestBody PagamentoDto pagamentoDto) throws PagamentoNotFoundException {
+    public ResponseEntity<Void> updatePagamento(@PathVariable Long id, @Valid @RequestBody PagamentoDto pagamentoDto) throws PagamentoNotFoundException {
         var pagamentoMapper = mapper.convertValue(pagamentoDto, Pagamento.class);
         service.updatePagamento(id, pagamentoMapper);
 
