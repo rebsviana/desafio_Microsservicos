@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createPedido(@RequestBody PedidoDto pedidoDto) throws PedidoJaCadastrado {
+    public ResponseEntity<Void> createPedido(@Valid @RequestBody PedidoDto pedidoDto) throws PedidoJaCadastrado {
         final var pedido = mapper.convertValue(pedidoDto, Pedido.class);
 
         final var pagamentoSave = service.createPedido(pedido);
@@ -57,7 +58,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updatePedido(@PathVariable Long id, @RequestBody PedidoDto pedidoDto) throws PedidoNotFoundException {
+    public ResponseEntity<Void> updatePedido(@PathVariable Long id, @Valid @RequestBody PedidoDto pedidoDto) throws PedidoNotFoundException {
         final var pedido = mapper.convertValue(pedidoDto, Pedido.class);
         service.updatePedido(id,pedido);
 
@@ -65,7 +66,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}/{status}")
-    public ResponseEntity<Void> updateStatusPedido(@PathVariable Long id, @PathVariable Status status) throws PedidoNotFoundException {
+    public ResponseEntity<Void> updateStatusPedido(@PathVariable Long id, @Valid @PathVariable Status status) throws PedidoNotFoundException {
         service.updateStatusPedido(id,status);
 
         return ResponseEntity.ok().build();
