@@ -8,8 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Data
@@ -24,7 +23,7 @@ public class Pedido {
     private Long id;
 
     @Column(name = "data_hora")
-    private LocalDateTime dataHora;
+    private LocalDate dataHora;
 
     @Enumerated(EnumType.STRING)
     private Status status;

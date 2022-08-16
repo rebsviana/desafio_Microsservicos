@@ -1,8 +1,12 @@
 package com.ciandt.api.pedidos.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class PedidoNotFoundException extends Exception {
 
-    private static final String MSG = "Pedido not found";
+    public static final String MSG = "Pedido not found";
     public PedidoNotFoundException() {
         super(MSG);
     }
