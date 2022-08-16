@@ -6,7 +6,6 @@ import com.ciandt.api.pagamento.enums.Status;
 import com.ciandt.api.pagamento.repository.PagamentoRepository;
 import com.ciandt.api.pagamento.service.PagamentoService;
 import com.ciandt.api.pagamento.service.PedidoService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,18 +22,14 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     private final PagamentoRepository repository;
 
-    private final ObjectMapper mapper;
-
     private final String MSG_ID_INVALID = "Id precisa ser maior que zero";
-
-    private final String PAGAMENTO_NOT_FOUND = "Pagamento nao encontrado";
     
     @Override
     public Pagamento getPagamento(Long id) throws PagamentoNotFoundException {
 
         checkArgument(id > 0, MSG_ID_INVALID);
 
-        return repository.findById(id).orElseThrow(() -> new PagamentoNotFoundException(PAGAMENTO_NOT_FOUND));
+        return repository.findById(id).orElseThrow(PagamentoNotFoundException::new);
     }
 
     @Override
@@ -62,7 +57,7 @@ public class PagamentoServiceImpl implements PagamentoService {
         checkArgument(id > 0, MSG_ID_INVALID);
         checkNotNull(pagamento, "Pagamento nao pode ser null");
 
-        repository.findById(id).orElseThrow(() -> new PagamentoNotFoundException(PAGAMENTO_NOT_FOUND));
+        repository.findById(id).orElseThrow(PagamentoNotFoundException::new);
 
         repository.save(pagamento);
 
@@ -73,7 +68,7 @@ public class PagamentoServiceImpl implements PagamentoService {
     public void deletePagamento(Long id) throws PagamentoNotFoundException {
         checkArgument(id > 0, MSG_ID_INVALID);
 
-        final var pagamento = repository.findById(id).orElseThrow(() -> new PagamentoNotFoundException(PAGAMENTO_NOT_FOUND));
+        final var pagamento = repository.findById(id).orElseThrow(PagamentoNotFoundException::new);
 
         repository.delete(pagamento);
     }
