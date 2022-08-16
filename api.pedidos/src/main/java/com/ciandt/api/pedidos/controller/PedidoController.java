@@ -82,4 +82,11 @@ public class PedidoController {
 
         return ResponseEntity.ok().build();
     }
+
+    @ApiOperation(value = "Delete an order by id", notes = "Deletes an order as per the id")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePedido(@PathVariable Long id) throws PedidoNotFoundException {
+        service.deletePedido(id);
+        return ResponseEntity.noContent().build();
+    }
 }

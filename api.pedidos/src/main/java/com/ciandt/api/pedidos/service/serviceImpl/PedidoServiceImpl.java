@@ -67,4 +67,13 @@ public class PedidoServiceImpl implements PedidoService {
 
         repository.save(pedidoExist);
     }
+
+    @Override
+    public void deletePedido(Long id) throws PedidoNotFoundException {
+        checkArgument(id > 0, ID_INVALID);
+
+        var pedido = repository.findById(id).orElseThrow(PedidoNotFoundException::new);
+
+        repository.delete(pedido);
+    }
 }
