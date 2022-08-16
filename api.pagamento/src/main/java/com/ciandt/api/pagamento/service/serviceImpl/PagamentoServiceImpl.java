@@ -22,12 +22,12 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     private final PagamentoRepository repository;
 
-    private final String MSG_ID_INVALID = "Id precisa ser maior que zero";
+    private final String MSG_ID_INVALID = "Id precisa ser maior ou igual a zero";
     
     @Override
     public Pagamento getPagamento(Long id) throws PagamentoNotFoundException {
 
-        checkArgument(id > 0, MSG_ID_INVALID);
+        checkArgument(id >= 0, MSG_ID_INVALID);
 
         return repository.findById(id).orElseThrow(PagamentoNotFoundException::new);
     }
@@ -54,10 +54,12 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     @Override
     public void updatePagamento(Long id, Pagamento pagamento) throws PagamentoNotFoundException {
-        checkArgument(id > 0, MSG_ID_INVALID);
+        checkArgument(id >= 0, MSG_ID_INVALID);
         checkNotNull(pagamento, "Pagamento nao pode ser null");
 
         repository.findById(id).orElseThrow(PagamentoNotFoundException::new);
+
+        pagamento.setId(id);
 
         repository.save(pagamento);
 
@@ -66,7 +68,7 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     @Override
     public void deletePagamento(Long id) throws PagamentoNotFoundException {
-        checkArgument(id > 0, MSG_ID_INVALID);
+        checkArgument(id >= 0, MSG_ID_INVALID);
 
         final var pagamento = repository.findById(id).orElseThrow(PagamentoNotFoundException::new);
 
