@@ -41,7 +41,7 @@ public class SwaggerConfig {
                 .globalResponseMessage(RequestMethod.GET, Arrays.asList(MSG_200, MSG_500))
                 .globalResponseMessage(RequestMethod.POST, Arrays.asList(MSG_201, PEDIDO_JA_CADASTRADO_400, ARGUMENT_INVALID_400, MSG_500))
                 .globalResponseMessage(RequestMethod.PUT, Arrays.asList(MSG_200, ARGUMENT_INVALID_400, MSG_404, MSG_500))
-                .globalResponseMessage(RequestMethod.DELETE, Arrays.asList())
+                .globalResponseMessage(RequestMethod.DELETE, Arrays.asList(MSG_204, MSG_404, MSG_500))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.ciandt.api.pedidos.controller"))
                 .paths(PathSelectors.any())
