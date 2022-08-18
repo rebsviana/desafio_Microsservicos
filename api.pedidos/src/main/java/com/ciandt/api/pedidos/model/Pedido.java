@@ -31,4 +31,11 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     @JsonIgnore
     Set<ItemPedido> itens;
+
+    public Pedido(Long id, LocalDate dataHora, Status status) {
+        this.id = id;
+        this.dataHora = dataHora;
+        this.status = status;
+    }
+
 }
