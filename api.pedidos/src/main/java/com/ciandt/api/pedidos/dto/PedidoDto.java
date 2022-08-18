@@ -1,17 +1,19 @@
 package com.ciandt.api.pedidos.dto;
 
-import com.ciandt.api.pedidos.model.ItemPedido;
 import com.ciandt.api.pedidos.enums.Status;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PedidoDto {
 
     @ApiModelProperty(example = "1", required = true)
@@ -23,7 +25,5 @@ public class PedidoDto {
     @ApiModelProperty(example = "CONFIRMADO", required = true)
     @NotNull(message = "Status não pode ser vazio")
     private Status status;
-
-    @JsonIgnore
-    Set<ItemPedido> itens;
 }
+
