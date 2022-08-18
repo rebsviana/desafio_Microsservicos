@@ -77,10 +77,12 @@ public class PedidoController {
 
     @ApiOperation(value = "Update an order by id and status", notes = "Updates aa order as per the id and status")
     @PutMapping("/{id}/{status}")
-    public ResponseEntity<Void> updateStatusPedido(@PathVariable Long id, @Valid @PathVariable Status status) throws PedidoNotFoundException {
-        service.updateStatusPedido(id,status);
+    public ResponseEntity<PedidoDto> updateStatusPedido(@PathVariable Long id, @Valid @PathVariable Status status) throws PedidoNotFoundException {
+        var pedido = service.updateStatusPedido(id,status);
 
-        return ResponseEntity.ok().build();
+        final var pedidoDto = mapper.convertValue(pedido, PedidoDto.class);
+
+        return ResponseEntity.ok(pedidoDto);
     }
 
     @ApiOperation(value = "Delete an order by id", notes = "Deletes an order as per the id")

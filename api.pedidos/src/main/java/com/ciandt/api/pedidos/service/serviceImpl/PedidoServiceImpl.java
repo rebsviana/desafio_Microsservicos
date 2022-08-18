@@ -47,17 +47,17 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public void updatePedido(Long id, Pedido pedido) throws PedidoNotFoundException {
+    public Pedido updatePedido(Long id, Pedido pedido) throws PedidoNotFoundException {
         checkArgument(id > 0, ID_INVALID);
         checkNotNull(pedido, PEDIDO_NULL);
 
-        repository.findById(id).orElseThrow(PedidoNotFoundException::new);
+        var pedidoResponse = repository.findById(id).orElseThrow(PedidoNotFoundException::new);
 
-        repository.save(pedido);
+        return repository.save(pedido);
     }
 
     @Override
-    public void updateStatusPedido(Long id, Status status) throws PedidoNotFoundException {
+    public Pedido updateStatusPedido(Long id, Status status) throws PedidoNotFoundException {
         checkArgument(id > 0, ID_INVALID);
         checkNotNull(status, "Status nao pode ser vazio");
 
@@ -65,7 +65,7 @@ public class PedidoServiceImpl implements PedidoService {
 
         pedidoExist.setStatus(status);
 
-        repository.save(pedidoExist);
+        return repository.save(pedidoExist);
     }
 
     @Override

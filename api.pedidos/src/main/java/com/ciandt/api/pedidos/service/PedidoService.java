@@ -14,9 +14,9 @@ public interface PedidoService {
 
     Pedido createPedido(Pedido pedido) throws PedidoJaCadastrado;
 
-    void updatePedido(Long id, Pedido pedido) throws PedidoNotFoundException;
+    Pedido updatePedido(Long id, Pedido pedido) throws PedidoNotFoundException;
 
-    void updateStatusPedido(Long id, Status status) throws PedidoNotFoundException;
+    Pedido updateStatusPedido(Long id, Status status) throws PedidoNotFoundException;
 
     void deletePedido(Long id) throws PedidoNotFoundException;
 }
