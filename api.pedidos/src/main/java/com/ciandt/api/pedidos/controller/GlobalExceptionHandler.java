@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorDto> handleValidationException(MethodArgumentNotValidException exception){
+    public ResponseEntity<ErrorDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception){
         log.error("Validation Exception: {}", exception.getMessage());
         var errorDto =
                 ErrorDto.builder()
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = PedidoJaCadastrado.class)
-    public ResponseEntity<ErrorDto> handleValidationException(PedidoJaCadastrado exception){
+    public ResponseEntity<ErrorDto> handlePedidoJaCadastradoException(PedidoJaCadastrado exception){
         log.error("Validation Exception: {}", exception.getMessage());
         var errorDto =
                 ErrorDto.builder()
